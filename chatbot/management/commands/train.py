@@ -10,5 +10,5 @@ class Command(BaseCommand):
         retriever.train('chatbot/data/raw_data/Full_BinBaz_Data2.csv')
         self.stdout.write(self.style.SUCCESS(
             f"Trained on {len(retriever.qa_pairs)} QA pairs\n"
-            f"Sample question: {retriever.qa_pairs[0]['question'][:30]}..."
+            f"Sample question: {retriever.qa_pairs[0]['title'][:30]}..."
         ))
