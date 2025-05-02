@@ -1,0 +1,23 @@
+{% extends 'chatbot/base.html' %}
+
+
+{% block content %}
+<a class="btn btn-primary mt-3" style="margin-right: 90%;" href="{% url 'chat' %}">العودة للمحادثة</a>
+<h2 style="color: white;">فتاويي السابقة</h2>
+
+{% if fatwas %}
+  <ul>
+    {% for fatwa in fatwas %}
+      <li class="mb-3" style="color: white;">
+        <strong style="color: rgb(234, 207, 29);">السؤال:</strong> {{ fatwa.question }}<br>
+        <strong style="color: rgb(63, 157, 42);">الجواب:</strong> {{ fatwa.answer }}<br>
+        <small class="text-muted" style="color: white;">بتاريخ: {{ fatwa.created_at|date:"Y-m-d H:i" }}</small>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p class="text-muted" style="color: white;">لم تقم بطرح أي فتوى بعد.</p>
+{% endif %}
+
+{% endblock %}
+

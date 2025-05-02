@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-lg navbar-custom header-green shadow-sm py-3 position-relative" dir="rtl">
+
+  <div class="container-fluid justify-content-between">
+
+    <!-- Animated icon (crescent) on the right -->
+    <div class="d-flex align-items-center">
+      <img src="/static/chatbot/img/crescent-moon.gif" alt="هلال" style="width: 38px; height: auto;">
+    </div>
+
+    <!-- Centered brand/logo with Quranic style -->
+    <div class="position-absolute start-50 translate-middle-x" style="top: 1%; z-index: 1;">
+      <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="#" style="
+        font-size: 2.8rem;
+        font-family: 'QuranKufi', serif;
+        color: #0288D1;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.08);
+      ">
+        <i class="bi bi-book fs-2" style="margin-top: 20px;"></i> فتوى
+      </a>
+    </div>
+
+    <!-- Mobile toggle button -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Right-side nav links -->
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+      <ul class="navbar-nav align-items-center gap-2">
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'my_fatwas' %}">الفتاوي السابقة</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">تسجيل الخروج</a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">تسجيل دخول</a>
+          </li>
+          <li class="nav-item">
+            <span class="text-muted">|</span>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'register' %}">تسجيل جديد</a>
+          </li>
+        {% endif %}
+      </ul>
+      
+    </div>
+
+  </div>
+</nav>

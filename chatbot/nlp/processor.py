@@ -20,7 +20,7 @@ class ArabicQARetriever:
     def _clean_arabic(self, text):
         text = unicodedata.normalize('NFD', str(text))
         text = ''.join(c for c in text if unicodedata.category(c) != 'Mn')
-        text = re.sub(r'[^؀-ۿ\s]', '', text)
+        text = re.sub(r'[^؀-ۿ\s]', '' , text)
         return re.sub(r'\s+', ' ', text).strip()
 
     def _load_model(self):

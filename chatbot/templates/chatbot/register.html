@@ -1,0 +1,49 @@
+{% extends 'chatbot/base.html' %}
+
+<!--<h2>تسجيل جديد</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">تسجيل</button>
+</form>-->
+
+{% block content %}
+
+<h2 class="text-center mb-4" style="margin: auto;">تسجيل حساب جديد</h2>
+
+<form method="post" class="card p-4 shadow-sm" style="max-width: 450px; margin: auto;  align-items: center;">
+  {% csrf_token %}
+
+  <div class="mb-3">
+    <label class="form-label">اسم المستخدم</label><br>
+    {{ form.username }}
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">كلمة المرور</label><br>
+    {{ form.password1 }}
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">تأكيد كلمة المرور</label><br>
+    {{ form.password2 }}
+  </div>
+
+  <button type="submit" class="btn btn-success w-100">تسجيل</button>
+
+  <div class="text-center mt-3">
+    <a href="{% url 'login' %}">لديك حساب؟ سجل دخولك</a>
+  </div>
+
+  {% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} text-center" role="alert">
+      {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
+
+</form>
+{% endblock %}
+
+
