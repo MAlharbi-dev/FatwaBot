@@ -1,81 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Islamic Fatwa Chatbot</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'chatbot/css/styles.css' %}" />
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-</head>
-<body>
+{% extends 'chatbot/base.html' %}
 
-   <h1>فتوى</h1>
+{% block title %}الصفحة الرئيسية - فتاوى{% endblock %}
 
-   <div>
+{% block content %}
+<div class="d-flex justify-content-center" >
+  <div class="chat-wrapper w-100" style="max-width: 900px; ">
 
-    <div id="chatbot">
-        <p class="botText"><span>Hi There</span></p>
-    </div>
+      <!-- Chat display container -->
+      <div id="chatbot" class="mb-3 " ></div>
 
-    <div id="userInput">
-        <input type="text" id="textInput" name="userMessage" placeholder="اكتب هنا.."/>
-        <input type="submit" value="Send" id="buttonInput"/>
-        <input type="submit" value="Random Question" id="randomQuestionBtn"/>
-    </div>
+      <!-- User input and send button -->
+      <div id="userInput" class="input-group ">
+          <input type="text" id="textInput" name="userMessage" class="form-control " placeholder="اكتب سؤالك هُنا...">
+          <button class="btn btn-primary" id="buttonInput">إرسال</button>
+      </div>
+
+      <!-- Clear chat button -->
+      <div class="text-center">
+          <button class="btn btn-outline-danger btn-sm mt-3" onclick="clearChat()">مسح المحادثة</button>
+          <input type="submit" class="btn btn-primary btn-sm mt-3" style="background-color: #a4d409;color: white;border: none;" value="عشوائي" id="randomQuestionBtn"/>
+      </div>
+
+      <div id="quick-questions" class="my-3">
+        <button class="quick-btn">ما حكم التصوير؟</button>
+        <button class="quick-btn">هل يجوز صلاة الوتر ركعة واحدة؟</button>
+        <button class="quick-btn">ما حكم لبس الذهب للرجال؟</button>
+        <button class="quick-btn">ما حكم قراءة الفاتحة على الميت عند قبره؟</button>
+        <button class="quick-btn">حكم الكذب غير المتعمد؟</button>
+        <button class="quick-btn">هل لفاعل الكبائر من توبة؟</button>
+        <button class="quick-btn">حكم الفطر في نهار رمضان للمريض؟</button>
+        <button class="quick-btn">حكم زيادة الثمن في البيع بالتقسيط؟</button>
+     </div>
+      
+     
+      
+  </div>
+</div>
+{% endblock %}
+<script>
     
-   </div>
-
-   <script>
-    
-    // Function to get user response
-    function getUserResponse() {
-        var userText = $('#textInput').val();
-        if (userText.trim() === "") return;
-
-        var userHTML = "<p class='userText'><span>" + userText + "</span></p>";
-        $('#textInput').val("");  // Clear input field
-
-        $('#chatbot').append(userHTML);
-        
-        // Send the user question to get the fatwa answer
-        $.get('/chatbot/getResponse/', { userMessage: userText })
-         .done(function(data) {
-             $('#chatbot').append("<p class='botText'><span>" + data + "</span></p>");
-         });
-    }
-
-    // Function to get random question
-    function getRandomQuestion() {
-        $.get('/chatbot/get-random-question/')
-         .done(function(data) {
-             // Show the random question in the input box
-             $('#textInput').val(data.question);
-             getUserResponse();  // Automatically send the random question
-         })
-         .fail(function() {
-            $('#chatbot').append("<p class='botText'><span>Error fetching random question</span></p>");
-         });
-    }
-
-    // Bind button click for sending user input
-    $('#buttonInput').click(function () {
-        getUserResponse();
-    });
-
-    // Enable "Enter" key to send message
-    $('#textInput').keypress(function (event) {
-        if (event.which == 13) { // 13 is the Enter key
-            event.preventDefault();
-            getUserResponse();
-        }
-    });
-
-    // Bind button click for getting random question
-    $('#randomQuestionBtn').click(function () {
-        getRandomQuestion();
-    });
-
-   </script>
-</body>
-</html>
+  </script>
